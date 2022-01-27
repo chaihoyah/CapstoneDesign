@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <title>리뷰작성</title>
+</head>
+
+<body>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+
+    </script>
+
+
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">
+              메인으로
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              로그인
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">내 계정</a></li>
+              <li><a class="dropdown-item" href="#">ID/PW 찾기</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">회원가입하기</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <br>
+
+  <h3 class="display-9 text-center">
+    <테스트케이스>
+  </h3>
+  <br>
+
+  <div class="card mx-auto mb-2" style="width: 24rem;">
+    <div class="d-flex align-items-center" style="height:400px;">
+      <img class="card-img-top" src="kimbab.jpg" alt="Card image cap">
+    </div>
+  </div>
+
+
+  <div class="text-center mt-3">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      리뷰작성
+    </button>
+  </div>
+
+  <br><br><br><br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            &nbsp;리뷰작성
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form class="tagForm" id="tag-form" action="183.98.4.54:8886" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-auto">
+                  <label for="select">별점매기기:</label>
+                  <select class="form-select" id="select" aria-label="Default select example">
+                    <option selected>선택메뉴를 열어주세요.</option>
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5">★★★★★</option>
+                  </select>
+                </div>
+                <div class="col"></div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="mb-3">
+                  <label for="FormControl1" class="form-label">평가</label>
+                  <textarea class="form-control" id="FormControl1" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            <input id="tag-form-submit" type="submit" class="btn btn-primary" value="전송">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    $(function() {
+
+      $('#tag-form-submit').on('click', function(e) {
+        e.preventDefault();
+          var data = {
+            star : $("#select").val(),
+            text : $("#FormControl1").val()
+          };
+        $.ajax({
+          type: "POST",
+          url: "http://183.98.4.54:8886",
+          data: {data:data},
+          success: function(response) {
+            alert(response['response']);
+            },
+          error: function(xhr, ajaxOptions, thrownError) {
+              alert("작성이 완료되었습니다. 감사합니다.");
+          }
+        });
+        return false;
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>
