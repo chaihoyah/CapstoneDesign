@@ -1,6 +1,6 @@
 import psycopg2
 
-connect = psycopg2.connect("dbname=capstone user=postgres password=akqj1029")
+connect = psycopg2.connect("dbname=capstone user=postgres password=********")
 cur = connect.cursor()
 
 global id
